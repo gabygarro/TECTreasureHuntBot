@@ -6,7 +6,12 @@ module.exports = function(bot) {
     var description = "Repetir tu mensaje";
 
     var exec = function(msg, reply) {
-        reply.sendMessage(msg.command.text);
+        if (msg.command.text == "") {
+            reply.sendMessage("No puedo repetir lo que no me dicen");
+        }
+        else {
+            reply.sendMessage(msg.command.text);
+        }
     };
 
     return {

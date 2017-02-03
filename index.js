@@ -100,6 +100,7 @@ utils.getGlobbedFiles('./plugins/**/*.js').forEach(function(pluginPath) {
 // On message
 bot.on('message', function (message) {
     //Revisar si es un mensaje de un grupo o de una persona
+    //TO DO: Chequear que el mensaje venga de un grupo permitido
     var privado = true;
     if (message.chat.type == 'group') {
         privado = false;
@@ -107,20 +108,8 @@ bot.on('message', function (message) {
 
 	// Registrar conversación a consola
 	var dt = new Date();
-	var entrante = dt.toUTCString();
-    if (privado) {
-        entrante += "\t" + message.chat.username  + 
-            " (" + message.from.first_name + " " + message.from.last_name + 
-            " " +  message.from.id + "): " + message.text;
-        console.log(entrante);
-    }
-    else {
-        entrante += "\t" + message.chat.title + " - " + message.from.username + 
-            " (" + message.from.first_name + " " + message.from.last_name + 
-            " " + message.from.id + "): " + message.text;
-        console.log(entrante);
-    }
-    //console.log(message);
+	console.log("--------------------------------------------\n" + dt.toUTCString());
+    console.log(message);
 
     // Parse msg text
     if (_.startsWith(message.text, '/')) { //es un comando
@@ -148,14 +137,14 @@ bot.on('message', function (message) {
         if(!foundPlugin) {
             var respuesta = "Comando no existente."
             bot.sendMessage(message.chat.id, respuesta);
-            console.log("\tYo: " + respuesta);
+            console.log("Yo: " + respuesta);
         }
     }
     else {
         //Enviar respuesta
         if (message.text != undefined) {
             var respuesta = "Solo entiendo si me hablan por medio de comandos. Mis comandos están aquí: /help\n";
-            console.log("\tYo: " + respuesta);
+            console.log("Yo: " + respuesta);
             bot.sendMessage(message.chat.id, respuesta);
         }
     }

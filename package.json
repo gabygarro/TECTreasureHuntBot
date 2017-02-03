@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/gabygarro/TECTreasureHuntBot#readme",
   "dependencies": {
+    "express": "^4.14.1",
     "glob": "^7.1.1",
+    "mysql": "^2.13.0",
     "node-telegram-bot-api": "^0.26.0",
     "path": "^0.12.7",
     "request": "^2.79.0"
