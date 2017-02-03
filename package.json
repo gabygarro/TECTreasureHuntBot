@@ -1,0 +1,33 @@
+{
+  "name": "tectreasurehuntbot",
+  "version": "1.0.0",
+  "description": "Telegram bot to manage treasure hunt clues",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabygarro/TECTreasureHuntBot.git"
+  },
+  "keywords": [
+    "tecnologico",
+    "de",
+    "costa",
+    "rica",
+    "treasure",
+    "hunt"
+  ],
+  "author": "Gabriela Garro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabygarro/TECTreasureHuntBot/issues"
+  },
+  "homepage": "https://github.com/gabygarro/TECTreasureHuntBot#readme",
+  "dependencies": {
+    "glob": "^7.1.1",
+    "node-telegram-bot-api": "^0.26.0",
+    "path": "^0.12.7",
+    "request": "^2.79.0"
+  }
+}
