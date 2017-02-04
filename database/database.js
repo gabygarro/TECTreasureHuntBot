@@ -26,7 +26,7 @@ module.exports.getAdmins = function() {
         if (!err)
             console.log('The solution is: ', rows);
         else
-            console.log('Error while performing query.');
+            console.log('Error while retrieving admins:\n' + err);
         });
 }
 
@@ -39,7 +39,7 @@ module.exports.getGroupIDs = function(groupID, callback) {
             callback(rows);
         }
         else {
-            console.log('Error while performing query.');
+            console.log('Error while retrieving groupIDs:\n' + err);
         }
     });  
 }
@@ -56,7 +56,7 @@ module.exports.getClue = function(cluecode, groupID, callback) {
                 callback(rows);
             }
             else {
-                console.log("Error retrieving clue.");
+                console.log("Error retrieving clue:\n" + err);
             }
         });
 }
@@ -71,7 +71,7 @@ module.exports.unlockClue = function(cluecode, groupID, callback) {
                 callback(result);
             }
             else {
-                console.log("Error unlocking clue.");
+                console.log("Error unlocking clue:\n" + err);
             }
         });
 }
@@ -84,7 +84,48 @@ module.exports.incrementNextClue = function(groupID, callback) {
                 callback(result);
             }
             else {
-                console.log("Error incrementing next clue.");
+                console.log("Error incrementing next clue.\n" + err);
+            }
+        });
+}
+
+module.exports.getHelpmes = function(groupID, callback) {
+    connection.query("SELECT helpmeCounter from `group`" +
+        " WHERE groupnumber = " + groupID,
+        function(err, rows, fields) {
+            if (!err) {
+                callback(rows);
+            }
+            else {
+                console.log("Error retrieving helpme counter:\n" + err);
+            }
+        });
+}
+
+module.exports.decrementHelpmes = function(groupID, callback) {
+    connection.query("UPDATE `group` SET helpmeCounter = helpmeCounter -1 " +
+        "WHERE groupnumber = " + groupID,
+        function(err, result) {
+            if (!err) {
+                callback(result);
+            }
+            else {
+                console.log("Error decrementing helpmes:\n" + err);
+            }
+        });
+}
+
+module.exports.sendClueLocation = function(groupID, callback) {
+    connection.query("SELECT latitude, longitude FROM clue, `group` " +
+        " WHERE groupnumber = " + groupID +
+        " AND idGroup = group_idGroup " +
+        " AND nextClue = cluenumber + 1",
+        function(err, rows, fields) {
+            if (!err) {
+                callback(rows);
+            }
+            else {
+                console.log("Error retrieving location:\n" + err);
             }
         });
 }
